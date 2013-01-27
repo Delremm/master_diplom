@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+{% block top_menu %}
+    <div>
+        <a href="/">на главную</a>
+
+        {% if user.is_anonymous %}
+            <a href="/accounts/login/">зайти в личный кабинет</a>
+            <a href="/accounts/register/">регистрация</a>
+        {% else %}
+            <a href="/account/">личный кабинет</a>
+            <a href="/accounts/logout/">выйти</a>
+        {% endif %}
+
+    </div>
+{% endblock %}
+{% block content %}
+{% endblock %}
+{% block main %}
+{% endblock %}
+</body>
+</html>

@@ -1,0 +1,3 @@
+Вами был сделан заказ на сайте {{ site.name }}
+
+заказ: http://{{ site.domain }}/account/order/{{ order_id }}/

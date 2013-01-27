@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div>
+        <p>{{ object.status }}</p>
+        <p>{{ object.order_data.theme }}</p>
+        <p>{{ object.order_data.content }}</p>
+        <p>{{ object.order_data.discipline }}</p>
+        <p>{{ object.user }}</p>
+    </div>
+    {{ object }}
+{% endblock %}

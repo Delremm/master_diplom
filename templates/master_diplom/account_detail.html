@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+<h5>sd</h5>
+{% block content %}
+    <p>email: {{ user.email }}</p>
+    {% with user.profiles.all.0 as profile %}
+        <p>имя и фамилия: {{ profile.name }}</p>
+        <p>телефон: {{ profile.phone }}</p>
+    {% endwith %}
+
+    <div>
+        <p><b>Заказы:</b></p>
+        {% for order in user.orders.all %}
+            <p>
+                <a href="/account/order/{{ order.id }}/">{{ order.created }}</a>
+            </p>
+        {% endfor %}
+    </div>
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% if authenticated %}
+        <p>email: {{ user.email }}</p>
+        <p>имя: {{ profile.name }}</p>
+        <p>телефон:{{ profile.phone }}</p>
+    {% endif %}
+    <form method="post" action="">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        <div class="fieldWrapper">
+            {{ form.email.errors }}
+            <label for="email">{{ form.email.label }}:</label>
+            {{ form.email }}
+        </div>
+        <div class="fieldWrapper">
+            {{ form.name.errors }}
+            <label for="name">{{ form.name.label }}:</label>
+            {{ form.name }}
+        </div>
+        <div class="fieldWrapper">
+            {{ form.phone.errors }}
+            <label for="phone">{{ form.phone.label }}:</label>
+            {{ form.phone }}
+        </div>
+
+        <input type="submit" value="Создать заказ">
+    </form>
+
+    {% if login_form %}
+        <a href="/accounts/login/?next=get_contact_info">log in</a>
+    {% endif %}
+{% endblock %}

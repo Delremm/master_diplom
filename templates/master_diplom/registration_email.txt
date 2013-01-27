@@ -1,0 +1,6 @@
+Вами был отправлен заказ на сайте {{ site.name }}
+
+ваш логин: {{ email}}
+ваш пароль: {{ password }}
+
+заказ: http://{{ site.domain }}/account/order/{{ order_id }}/
