@@ -4,7 +4,7 @@ DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
-    # ('Your Name', 'your_email@example.com'),
+    ('yura', 'admin@master-diplom.com'),
 )
 
 MANAGERS = ADMINS
@@ -20,6 +20,14 @@ DATABASES = {
         'PORT': '',                      # Set to empty string for default.
     }
 }
+
+
+EMAIL_HOST = 'smtp.webfaction.com'
+EMAIL_HOST_USER = 'master_diplom'
+EMAIL_HOST_PASSWORD = '314159'
+DEFAULT_FROM_EMAIL = 'admin@master-diplom.com'
+SERVER_EMAIL = 'admin@master-diplom.com'
+
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -57,11 +65,11 @@ MEDIA_URL = ''
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/var/www/example.com/static/"
-STATIC_ROOT = ''
+STATIC_ROOT = '/home/delremm/webapps/master_diplom_static/'
 
 # URL prefix for static files.
 # Example: "http://example.com/static/", "http://static.example.com/"
-STATIC_URL = '/static/'
+STATIC_URL = 'http://master-diplom.com/static/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
