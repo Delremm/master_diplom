@@ -1,6 +1,6 @@
 # Django settings for master_diplom project.
 import os
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
@@ -11,11 +11,11 @@ MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'base.db',                      # Or path to database file if using sqlite3.
+        'ENGINE': 'django.db.backends.postgresql_psycopg2', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': 'master_diplom',                      # Or path to database file if using sqlite3.
         # The following settings are not used with sqlite3:
-        'USER': '',
-        'PASSWORD': '',
+        'USER': 'master_diplom',
+        'PASSWORD': '314159',
         'HOST': '',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
         'PORT': '',                      # Set to empty string for default.
     }
@@ -115,14 +115,7 @@ TEMPLATE_DIRS = (os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '
 
 AUTHENTICATION_BACKENDS =('registration_email.auth.EmailBackend',)
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-"""
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 465
-EMAIL_HOST_USER = 'g1m5yv@gmail.com'
-EMAIL_HOST_PASSWORD = '618422010590'
-EMAIL_USE_TLS = True
-"""
+
 LOGIN_REDIRECT_URL = '/'
 
 INSTALLED_APPS = (
@@ -140,6 +133,28 @@ INSTALLED_APPS = (
     'registration',
     'registration_email'
 )
+
+#local settings
+if os.environ.get('django_local', 0 ):
+    DEBUG = True
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+            'NAME': 'base.db',                      # Or path to database file if using sqlite3.
+            # The following settings are not used with sqlite3:
+            'USER': '',
+            'PASSWORD': '',
+            'HOST': '',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
+            'PORT': '',                      # Set to empty string for default.
+        }
+    }
+    
+    STATIC_ROOT = os.path.join(os.path.dirname(__file__), '..', 'static')
+
+    STATIC_URL = '/static/'
+
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
