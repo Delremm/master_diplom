@@ -62,21 +62,3 @@ class UserProfile(models.Model):
     def __unicode__(self):
         return self.user.email
 
-from django.contrib import admin
-from django.template.defaultfilters import escape
-from django.core.urlresolvers import reverse
-
-class OrderAdmin(admin.ModelAdmin):
-
-    readonly_fields = ('order_data1',)
-
-    def order_data1(self, instance):
-        return "sdff" + "rr jhjkhjk, ".join(instance.get_full_address())
-
-    # short_description functions like a model field's verbose_name
-    order_data1.short_description = u"Заказ"
-    # in this example, we have used HTML tags in the output
-    order_data1.allow_tags = True
-
-admin.site.register(Order, OrderAdmin)
-admin.site.register(OrderData)

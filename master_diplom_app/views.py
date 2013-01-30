@@ -170,7 +170,7 @@ class ContactInfoView(generic.TemplateView):
         message = render_to_string('master_diplom/registration_email.txt',
             ctx_dict)
 
-        user.email_user(subject, message, 'ggg@gg.ru')
+        user.email_user(subject, message, 'master-diplom.com')
 
     def send_email(self, template_name, user, **kwargs):
 
@@ -184,7 +184,7 @@ class ContactInfoView(generic.TemplateView):
         message = render_to_string(template_name,
             ctx_dict)
 
-        user.email_user(subject, message, 'ggg@gg.ru')
+        user.email_user(subject, message, 'master-diplom.com')
 
     def register_new_user(self, request, email, password):
         """
