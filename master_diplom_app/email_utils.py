@@ -14,10 +14,8 @@ def send_email(template_name, user, **kwargs):
 
     message = render_to_string(template_name,
         ctx_dict)
-    print "templateeee: %s" % template_name
-    print "user: %s" % user
-    print "kwargs: %s" % kwargs
-    user.email_user(subject, message, 'master-diplom.com')
+
+    user.email_user(subject, message, 'manager@master-diplom.com')
 
 def send_payment_notification(request, user, **kwargs):
     if Site._meta.installed:
@@ -25,6 +23,5 @@ def send_payment_notification(request, user, **kwargs):
     else:
         site = RequestSite(request)
     kwargs['site'] = site
-    print kwargs
-    print user.email
+
     send_email('master_diplom/email_templates/payment_notification.txt', user, **kwargs)
