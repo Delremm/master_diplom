@@ -6,7 +6,7 @@ from django.core.urlresolvers import reverse
 from django.forms.widgets import Widget
 from django.db import models
 
-from django.utils.html import format_html_join
+
 from django.utils.safestring import mark_safe
 
 
