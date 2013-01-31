@@ -124,6 +124,20 @@ ROOT_URLCONF = 'master_diplom.urls'
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = 'master_diplom.wsgi.application'
 
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+    # default template context processors
+    "django.contrib.auth.context_processors.auth",
+    "django.core.context_processors.debug",
+    "django.core.context_processors.i18n",
+    "django.core.context_processors.media",
+    "django.core.context_processors.static",
+    "django.core.context_processors.tz",
+    "django.contrib.messages.context_processors.messages",
+
+    'django.core.context_processors.request',
+
+    )
 TEMPLATE_DIRS = (os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'templates')),)
 
 AUTHENTICATION_BACKENDS =('registration_email.auth.EmailBackend',)
@@ -139,12 +153,14 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # Uncomment the next line to enable the admin:
+
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
-    # 'django.contrib.admindocs',
+    'django.contrib.admindocs',
     'master_diplom_app',
     'registration',
-    'registration_email'
+    'registration_email',
+    'robokassa',
 )
 
 #local settings
@@ -168,7 +184,9 @@ if os.environ.get('django_local', 0 ):
 
     STATIC_URL = '/static/'
 
-
+ROBOKASSA_LOGIN = 'fhpt1'
+ROBOKASSA_PASSWORD1 = 'fhpt1fhpt1'
+ROBOKASSA_TEST_MODE = True
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
 # the site admins on every HTTP 500 error when DEBUG=False.

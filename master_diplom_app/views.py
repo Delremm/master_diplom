@@ -9,6 +9,8 @@ from forms import OrderDataForm, ContactsForm
 
 from registration_email.forms import EmailAuthenticationForm
 
+from robokassa.forms import RobokassaForm
+
 class UserAccountView(generic.TemplateView):
     template_name = 'master_diplom/account_detail.html'
 
@@ -253,7 +255,19 @@ class OrderDetailView(generic.TemplateView):
     def get(self, request, *args, **kwargs):
         context = self.get_context_data(**kwargs)
         try:
-            context['object'] = request.user.orders.get(id=kwargs['pk'])
+            order = request.user.orders.get(id=kwargs['pk'])
         except Order.DoesNotExist:
             return HttpResponseRedirect('/account/')
+        else:
+            form = RobokassaForm(initial={
+                'OutSum': order.total,
+                'InvId': order.id,
+                'Desc': order.order_data.theme,
+                'Email': request.user.email,
+                # 'IncCurrLabel': '',
+                # 'Culture': 'ru'
+            })
+            context['object'] = order
+            context['payment_form'] = form
         return self.render_to_response(context)
+

@@ -4,6 +4,7 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
+
 class OrderData(models.Model):
     DISCIPLINE = (
         ('1', 'other'),
@@ -25,6 +26,10 @@ class OrderData(models.Model):
     deadline = models.DateField(u'срок сдачи', blank=True, null=True)
     notes = models.TextField(u'примечания', blank=True, null=True)
 
+    class Meta:
+        verbose_name = u'Данные о заказе'
+        verbose_name_plural = u'Данные о заказе'
+
     def __unicode__(self):
         return u'id: %s; theme: %s; content: %s;' % (self.id, self.theme, self.content)
 
@@ -37,6 +42,7 @@ class Order(models.Model):
         )
 
     total = models.FloatField(u'цена', blank=True, null=True)
+    #total_payed = models.FloatField(u'цена', blank=True, null=True)
     created = models.DateTimeField(default=datetime.now(), verbose_name=u'время создания заказа')
     order_data = models.OneToOneField(OrderData, blank=True, null=True, verbose_name=u'информация о заказе')
     status = models.CharField(u'статус', max_length=1, default='1', choices=ORDER_STATUS)
@@ -51,6 +57,8 @@ class Order(models.Model):
             return "id: %s; theme: %s; content: %s" % ( self.id, self.order_data.theme, self.order_data.content)
         else:
             return self.created.strftime('%Y %m  %d')
+
+
 
 class UserProfile(models.Model):
 

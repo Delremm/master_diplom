@@ -25,4 +25,5 @@ urlpatterns = patterns('',
     url(r'^accounts/', include('registration_email.backends.simple.urls')),
     url(r'', include('master_diplom_app.urls')),
     url(r'^/', RedirectView.as_view(url='/')),
+    url(r'^robokassa/', include('robokassa.urls')),
 )

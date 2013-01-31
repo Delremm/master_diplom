@@ -8,5 +8,13 @@
         <p>{{ object.order_data.discipline }}</p>
         <p>{{ object.user }}</p>
     </div>
-    {{ object }}
+    <p>{{ object }}</p>
+    <div>
+        {% if object.total %}
+            <form action="{{ payment_form.target }}" method="POST">
+                <p>{{ payment_form.as_p }}</p>
+                <p><input type="submit" value="Оплатить"></p>
+            </form>
+        {% endif %}
+    </div>
 {% endblock %}
