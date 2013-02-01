@@ -29,7 +29,7 @@ def receive_result(request):
 
         return HttpResponse('OK%s' % id)
     #return HttpResponse('error: bad signature')
-    return HttpResponse(str(form.fields))
+    return HttpResponse(str(form.cleaned_data['InvId']) + str(form.cleaned_data['OutSum']))
 
 
 @csrf_exempt
