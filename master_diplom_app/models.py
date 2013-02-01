@@ -38,7 +38,9 @@ class Order(models.Model):
         ('1', u'in consideration'),
         ('2', u'waiting for payment'),
         ('3', u'payment confirmed'),
-        ('4', u'done')
+        ('4', u'done')#,
+        #('5', u'not recieved'),
+        #('6', u'customer aproved')
         )
 
     total = models.FloatField(u'цена', blank=True, null=True)
@@ -47,6 +49,7 @@ class Order(models.Model):
     order_data = models.OneToOneField(OrderData, blank=True, null=True, verbose_name=u'информация о заказе')
     status = models.CharField(u'статус', max_length=1, default='1', choices=ORDER_STATUS)
     user = models.ForeignKey(User, related_name='orders', blank=True, null=True)
+    #work_file = models.FileField('
 
     class Meta:
         verbose_name = u'Заказ'
