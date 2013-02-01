@@ -54,6 +54,15 @@ class OrderAdmin(admin.ModelAdmin):
         self.message_user(request, message_bit)
     payment_notification.short_description = u"Уведомить об оплате"
 
+    def send_work(self, request, queryset):
+        for q in queryset:
+            if q.work_file:
+                pass
+            else:
+                message_bit = u'работа не загружена'
+        self.message_user(request, queryset)
+    send_work.short_description = u'Выслать работу'
+
 
 
 

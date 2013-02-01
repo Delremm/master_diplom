@@ -18,8 +18,8 @@
         {{ form.password }}
     </div>
     <div class="fieldWrapper">
-        <a href="{% url "auth_password_reset" %}">{% trans "Forgot your password?" %}</a>
-        <a href="{% url "registration_register" %}">{% trans "Register a new account" %}</a>?
+        <a href="{% url "auth_password_reset" %}">{% trans "Забили пароль?" %}</a>
+        <a href="{% url "registration_register" %}">{% trans "Зарегистрироваться" %}</a>?
     </div>
     <input type="hidden" name="next" value="{{ next }}" />
     <input type="submit" value="{% trans "Login" %}">
