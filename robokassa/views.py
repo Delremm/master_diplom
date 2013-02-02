@@ -13,7 +13,6 @@ from robokassa.signals import result_received, success_page_visited, fail_page_v
 def receive_result(request):
     """ обработчик для ResultURL. """
     data = request.POST if USE_POST else request.GET
-    print data
     form = ResultURLForm(data)
     if form.is_valid():
         id, sum = form.cleaned_data['InvId'], form.cleaned_data['OutSum']
