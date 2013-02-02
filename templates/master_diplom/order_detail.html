@@ -10,7 +10,7 @@
     </div>
     <p>{{ object }}</p>
     <div>
-        {% if object.total %}
+        {% if object.status == '2' %}
             <form action="{{ payment_form.target }}" method="POST">
                 <p>{{ payment_form.as_p }}</p>
                 <p><input type="submit" value="Оплатить"></p>

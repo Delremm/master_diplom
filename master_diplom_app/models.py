@@ -4,21 +4,21 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
-
+TYPE_OF_WORK = (
+        ('1', 'other'),
+        ('2', 'referat'),
+        ('3', 'diplom')
+    )
 class OrderData(models.Model):
     DISCIPLINE = (
         ('1', 'other'),
         ('2', 'physics')
     )
 
-    TYPE_OF_WORK = (
-        ('1', 'diplom'),
-        ('2', 'referat')
-    )
     created = models.DateTimeField(u'дана создания', default=datetime.now())
 
     discipline = models.CharField(u'учебная дисциплина', max_length=1, default='1', choices=DISCIPLINE)
-    type = models.CharField(u'вид работы', max_length=1, default='1', choices=TYPE_OF_WORK)
+    type = models.CharField(u'вид работы', max_length=2, default='1', choices=TYPE_OF_WORK)
     theme = models.TextField(u'тема работы', blank=True, null=True)
     content = models.TextField(u'содержание работы', blank=True, null=True)
     pages_num = models.IntegerField(u'примерное число страниц', blank=True, null=True)
@@ -32,6 +32,27 @@ class OrderData(models.Model):
 
     def __unicode__(self):
         return u'id: %s; theme: %s; content: %s;' % (self.id, self.theme, self.content)
+
+class Work(models.Model):
+
+    title = models.CharField(max_length=255, blank=True, null=True, verbose_name=u'название работы')
+    content = models.TextField(blank=True, null=True, verbose_name=u'содержание')
+    type = models.CharField(u'вид работы', blank=True, null=True, max_length=2, choices=TYPE_OF_WORK)
+    
+    work = models.FileField(upload_to='media/works/')
+
+    private = models.BooleanField(default=True)
+
+    class Meta:
+        verbose_name = u'Выполненная работа'
+        verbose_name_plural = u'Выполненные работы'
+
+    def __unicode__(self):
+        if self.title:
+            return self.title
+        else:
+            return str(self.id)
+
 
 class Order(models.Model):
     ORDER_STATUS = (
@@ -49,7 +70,8 @@ class Order(models.Model):
     order_data = models.OneToOneField(OrderData, blank=True, null=True, verbose_name=u'информация о заказе')
     status = models.CharField(u'статус', max_length=1, default='1', choices=ORDER_STATUS)
     user = models.ForeignKey(User, related_name='orders', blank=True, null=True)
-    #work_file = models.FileField('
+    
+    work = models.OneToOneField(Work, blank=True, null=True, verbose_name=u'выполненная работа')
 
     class Meta:
         verbose_name = u'Заказ'

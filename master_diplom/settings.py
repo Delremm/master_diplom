@@ -67,7 +67,7 @@ USE_TZ = True
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/var/www/example.com/media/"
-MEDIA_ROOT = ''
+MEDIA_ROOT = '/home/delremm/webapps/master_diplom/master_diplom/media/'
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
@@ -179,6 +179,8 @@ if os.environ.get('django_local', 0 ):
             'PORT': '',                      # Set to empty string for default.
         }
     }
+
+    MEDIA_ROOT = os.path.join(os.path.dirname(__file__), '..', 'media')
     
     STATIC_ROOT = os.path.join(os.path.dirname(__file__), '..', 'static')
 

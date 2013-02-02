@@ -10,7 +10,7 @@ from django.db import models
 from django.utils.safestring import mark_safe
 
 
-from models import Order, OrderData, UserProfile
+from models import Order, OrderData, UserProfile, Work
 
 from email_utils import send_payment_notification
 
@@ -69,3 +69,4 @@ class OrderAdmin(admin.ModelAdmin):
 
 admin.site.register(Order, OrderAdmin)
 admin.site.register(OrderData)
+admin.site.register(Work)
