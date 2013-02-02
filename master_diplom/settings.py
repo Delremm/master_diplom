@@ -186,6 +186,8 @@ if os.environ.get('django_local', 0 ):
 
 ROBOKASSA_LOGIN = 'fhpt1'
 ROBOKASSA_PASSWORD1 = 'fhpt1fhpt1'
+ROBOKASSA_PASSWORD2 = 'fhpt1fhpt1fhpt1'
+ROBOKASSA_USE_POST = True
 ROBOKASSA_TEST_MODE = True
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
