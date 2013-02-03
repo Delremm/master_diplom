@@ -1,10 +1,8 @@
 # coding:utf8
 
 from django.contrib import admin
-from django.template.defaultfilters import escape
 from django.core.urlresolvers import reverse
-from django.forms.widgets import Widget
-from django.db import models
+
 
 
 from django.utils.safestring import mark_safe
@@ -12,7 +10,7 @@ from django.utils.safestring import mark_safe
 
 from models import Order, OrderData, UserProfile, Work
 
-from email_utils import send_payment_notification
+from email_utils import send_payment_notification, send_work
 
 
 def add_link_field(target_model = None, field = '', app='', field_name='link',
@@ -35,7 +33,7 @@ def add_link_field(target_model = None, field = '', app='', field_name='link',
 
 @add_link_field('orderdata','order_data', 'master_diplom_app')
 class OrderAdmin(admin.ModelAdmin):
-    actions = ['payment_notification']
+    actions = ['payment_notification', 'send_work']
 
     def payment_notification(self, request, queryset):
         #update status to "waiting for payment"
@@ -56,11 +54,18 @@ class OrderAdmin(admin.ModelAdmin):
 
     def send_work(self, request, queryset):
         for q in queryset:
-            if q.work_file:
-                pass
+            if q.work:
+                try:
+                    send_work(request, request.user, order=q)
+                except:
+                    message_bit = u'произошла ошибка, при отправке письма с работой'
+                else:
+                    q.status = '4'
+                    message_bit = u'работа отправлена'
+                    q.save()
             else:
                 message_bit = u'работа не загружена'
-        self.message_user(request, queryset)
+        self.message_user(request, message_bit)
     send_work.short_description = u'Выслать работу'
 
 

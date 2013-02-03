@@ -2,11 +2,11 @@
 
 {% block content %}
     <div>
-        <p>{{ object.status }}</p>
-        <p>{{ object.order_data.theme }}</p>
-        <p>{{ object.order_data.content }}</p>
-        <p>{{ object.order_data.discipline }}</p>
-        <p>{{ object.user }}</p>
+        <p>статус заказа: {{ object.status }}</p>
+        <p>тема работы: {{ object.order_data.theme }}</p>
+        <p>содержание: {{ object.order_data.content }}</p>
+        <p>вид работы: {{ object.order_data.discipline }}</p>
+        <p>заказчик: {{ object.user }}</p>
     </div>
     <p>{{ object }}</p>
     <div>
