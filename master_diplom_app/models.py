@@ -5,15 +5,47 @@ from django.contrib.auth.models import User
 
 
 TYPE_OF_WORK = (
-        ('1', 'other'),
-        ('2', 'referat'),
-        ('3', 'diplom')
+        ('1', u'other'),
+        ('2', u'referat'),
+        ('3', u'diplom')
     )
+
+class Order(models.Model):
+    ORDER_STATUS = (
+        ('1', u'в рассмотрении'),
+        ('2', u'ожидание платежа'),
+        ('3', u'платеж подтвержден'),
+        ('4', u'работа выслана')#,
+        #('5', u'not recieved'),
+        #('6', u'customer aproved')
+        )
+
+    total = models.FloatField(u'цена', blank=True, null=True)
+    #total_payed = models.FloatField(u'цена', blank=True, null=True)
+    created = models.DateTimeField(default=datetime.now(), verbose_name=u'время создания заказа')
+    #delete later
+    #order_data = models.OneToOneField(OrderData, blank=True, null=True, verbose_name=u'информация о заказе')
+    status = models.CharField(u'статус', max_length=1, default='1', choices=ORDER_STATUS)
+    user = models.ForeignKey(User, related_name='orders', blank=True, null=True)
+    #delete later
+    #work = models.OneToOneField(Work, blank=True, null=True, verbose_name=u'выполненная работа')
+
+    class Meta:
+        verbose_name = u'Заказ'
+        verbose_name_plural = u'Заказы'
+
+    def __unicode__(self):
+        if self.order_data:
+            return "id: %s; theme: %s; content: %s" % ( self.id, self.order_data.theme, self.order_data.content)
+        else:
+            return self.created.strftime('%Y %m  %d')
+
+
 class OrderData(models.Model):
     DISCIPLINE = (
-        ('1', 'other'),
-        ('2', 'physics')
-    )
+        ('1', u'other'),
+        ('2', u'physics')
+        )
 
     created = models.DateTimeField(u'дана создания', default=datetime.now())
 
@@ -26,6 +58,8 @@ class OrderData(models.Model):
     deadline = models.DateField(u'срок сдачи', blank=True, null=True)
     notes = models.TextField(u'примечания', blank=True, null=True)
 
+    order = models.OneToOneField(Order, null=True, blank=True, related_name='order_data', verbose_name=u'заказ')
+
     class Meta:
         verbose_name = u'Данные о заказе'
         verbose_name_plural = u'Данные о заказе'
@@ -33,15 +67,19 @@ class OrderData(models.Model):
     def __unicode__(self):
         return u'id: %s; theme: %s; content: %s;' % (self.id, self.theme, self.content)
 
+def datetime_ymd_tomedia():
+    return 'media/works/%s/' % datetime.now().strftime('%Y%m%d')
+
 class Work(models.Model):
 
     title = models.CharField(max_length=255, blank=True, null=True, verbose_name=u'название работы')
     content = models.TextField(blank=True, null=True, verbose_name=u'содержание')
     type = models.CharField(u'вид работы', blank=True, null=True, max_length=2, choices=TYPE_OF_WORK)
-    
-    work = models.FileField(upload_to='media/works/')
+
+    work = models.FileField(upload_to=datetime_ymd_tomedia())
 
     private = models.BooleanField(default=True)
+    order = models.OneToOneField(Order, blank=True, null=True, related_name='work', verbose_name=u'заказ')
 
     class Meta:
         verbose_name = u'Выполненная работа'
@@ -52,37 +90,6 @@ class Work(models.Model):
             return self.title
         else:
             return str(self.id)
-
-
-class Order(models.Model):
-    ORDER_STATUS = (
-        ('1', u'in consideration'),
-        ('2', u'waiting for payment'),
-        ('3', u'payment confirmed'),
-        ('4', u'done')#,
-        #('5', u'not recieved'),
-        #('6', u'customer aproved')
-        )
-
-    total = models.FloatField(u'цена', blank=True, null=True)
-    #total_payed = models.FloatField(u'цена', blank=True, null=True)
-    created = models.DateTimeField(default=datetime.now(), verbose_name=u'время создания заказа')
-    order_data = models.OneToOneField(OrderData, blank=True, null=True, verbose_name=u'информация о заказе')
-    status = models.CharField(u'статус', max_length=1, default='1', choices=ORDER_STATUS)
-    user = models.ForeignKey(User, related_name='orders', blank=True, null=True)
-    
-    work = models.OneToOneField(Work, blank=True, null=True, verbose_name=u'выполненная работа')
-
-    class Meta:
-        verbose_name = u'Заказ'
-        verbose_name_plural = u'Заказы'
-
-    def __unicode__(self):
-        if self.order_data:
-            return "id: %s; theme: %s; content: %s" % ( self.id, self.order_data.theme, self.order_data.content)
-        else:
-            return self.created.strftime('%Y %m  %d')
-
 
 
 class UserProfile(models.Model):

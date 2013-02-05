@@ -72,7 +72,7 @@ class CreateOrderView(generic.TemplateView):
                 notes = form.cleaned_data['notes'],
             )
             order_data = OrderData(**data)
-            order_data.save()
+            #order_data.save()
             request.session['order_data'] = order_data
             return HttpResponseRedirect('/get_contact_info/')
         context['form'] = form
@@ -115,8 +115,10 @@ class ContactInfoView(generic.TemplateView):
         if request.user.is_authenticated():
             site = self.get_site(request)
             order_data = request.session.get('order_data', None)
-            order = Order(order_data=order_data, user=request.user)
+            order = Order(user=request.user)
             order.save()
+            order_data.order = order
+            order_data.save()
             self.send_email('master_diplom/order_email.txt', request.user, order_id=order.id, site=site)
             return HttpResponseRedirect('/order_success/')
         form = ContactsForm(data=request.POST)
@@ -141,8 +143,10 @@ class ContactInfoView(generic.TemplateView):
                 # phone will be saved at user.last_name
                 site = self.get_site(request)
                 order_data = request.session.get('order_data', None)
-                order = Order(order_data=order_data, user=user)
+                order = Order(user=user)
                 order.save()
+                order_data.order = order
+                order_data.save()
                 self.send_registration_email(user, password, order.id, site)
                 return HttpResponseRedirect('/order_success/')
 

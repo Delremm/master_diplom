@@ -26,4 +26,5 @@ urlpatterns = patterns('',
     url(r'', include('master_diplom_app.urls')),
     url(r'^/', RedirectView.as_view(url='/')),
     url(r'^robokassa/', include('robokassa.urls')),
+    (r'^grappelli/', include('grappelli.urls')),
 )

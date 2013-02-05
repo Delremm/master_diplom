@@ -9,7 +9,7 @@ class OrderDataForm(forms.ModelForm):
     content = forms.CharField(widget=forms.Textarea, required=True, error_messages={'required': 'Введите содержание работы'})
     class Meta:
         model = OrderData
-        exclude =['created']
+        exclude =['created', 'order']
 
 
 class ContactsForm(forms.Form):
