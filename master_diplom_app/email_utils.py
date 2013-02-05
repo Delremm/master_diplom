@@ -1,4 +1,4 @@
-
+# coding:utf-8
 from django.contrib.sites.models import RequestSite
 from django.contrib.sites.models import Site
 from django.template.loader import render_to_string

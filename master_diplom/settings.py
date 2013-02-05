@@ -1,3 +1,5 @@
+# coding:utf-8
+
 # Django settings for master_diplom project.
 import os
 DEBUG = True
@@ -50,8 +52,10 @@ TIME_ZONE = 'America/Chicago'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
-LANGUAGE_CODE = 'en-us'
-
+LANGUAGE_CODE = 'ru-RU'
+LOCALE_PATHS = (
+    os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'locale')),
+    )
 SITE_ID = 1
 
 # If you set this to False, Django will make some optimizations so as not
@@ -153,7 +157,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # Uncomment the next line to enable the admin:
-    'grappelli',
+    #'grappelli',
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     'django.contrib.admindocs',

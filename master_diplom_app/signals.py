@@ -1,3 +1,5 @@
+# coding:utf-8
+
 from models import Order, OrderData
 
 from robokassa.signals import result_received

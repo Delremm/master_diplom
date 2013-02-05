@@ -1,4 +1,4 @@
-# coding:utf8
+# coding:utf-8
 
 from django.contrib import admin
 from django.core.urlresolvers import reverse
@@ -48,7 +48,7 @@ class OrderAdmin(admin.ModelAdmin):
             }),
         (u'Дополнительно', {
             'classes': ('collapse',),
-            'fields': ('created', 'user')
+            'fields': ('created', 'user'),
         }),
     )
     inlines = [OrderDataInline, OrderWorkInline]

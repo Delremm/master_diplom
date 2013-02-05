@@ -1,3 +1,4 @@
+# coding:utf-8
 
 from django.views import generic
 from django.contrib.auth.models import User
@@ -13,22 +14,6 @@ from robokassa.forms import RobokassaForm
 
 class UserAccountView(generic.TemplateView):
     template_name = 'master_diplom/account_detail.html'
-
-    def get_context_data(self, **kwargs):
-        context = super(UserAccountView, self).get_context_data(**kwargs)
-        return context
-    """
-    user = get_object_or_404(User, username=kwargs['username'])
-    context['object'] = user
-
-    try:
-        user = User.objects.get(username=kwargs['username'])
-
-        context['object'] = user
-    except User.DoesNotExist:
-        return HttpResponseRedirect('/master_diplom/account_doesnt_exists/')
-    """
-
 
     def get(self, request, *args, **kwargs):
         context = self.get_context_data(**kwargs)
