@@ -101,6 +101,7 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
+    'compressor.finders.CompressorFinder',
 )
 
 # Make this unique, and don't share it with anybody.
@@ -121,6 +122,8 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'fiber.middleware.ObfuscateEmailAddressMiddleware',
+    'fiber.middleware.AdminPageMiddleware',
 )
 
 ROOT_URLCONF = 'master_diplom.urls'
@@ -165,6 +168,9 @@ INSTALLED_APPS = (
     'registration',
     'registration_email',
     'robokassa',
+    'mptt',
+    'compressor',
+    'fiber',
 )
 
 #local settings
@@ -189,6 +195,7 @@ if os.environ.get('django_local', 0 ):
     STATIC_ROOT = os.path.join(os.path.dirname(__file__), '..', 'static')
 
     STATIC_URL = '/static/'
+    MEDIA_URL = ''
 
 ROBOKASSA_LOGIN = 'fhpt1'
 ROBOKASSA_PASSWORD1 = 'fhpt1fhpt1'

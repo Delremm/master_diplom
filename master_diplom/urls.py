@@ -28,4 +28,8 @@ urlpatterns = patterns('',
     url(r'^/', RedirectView.as_view(url='/')),
     url(r'^robokassa/', include('robokassa.urls')),
     #(r'^grappelli/', include('grappelli.urls')),
+    (r'^api/v2/', include('fiber.rest_api.urls')),
+    (r'^admin/fiber/', include('fiber.admin_urls')),
+    (r'^jsi18n/$', 'django.views.i18n.javascript_catalog', {'packages': ('fiber',),}),
+    (r'', 'fiber.views.page'),
 )
