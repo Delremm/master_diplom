@@ -171,6 +171,7 @@ INSTALLED_APPS = (
     'mptt',
     'compressor',
     'fiber',
+    'south',
 )
 
 #local settings
