@@ -1,5 +1,16 @@
 {% extends 'base.html' %}
+{% block header %}
+<!-- Subhead
+================================================== -->
+<header class="jumbotron subhead" id="overview">
+  <div class="container">
+	<p class="pull-right">help@master-diplom.com</p>
+    <h1>Мастер диплом</h1>
+    <p class="lead">Дипломы, курсовые, рефераты на заказ.</p>
 
+  </div>
+</header>
+{% endblock %}
 {% block content %}
     {% if authenticated %}
         <p>email: {{ user.email }}</p>

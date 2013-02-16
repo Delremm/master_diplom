@@ -1,18 +1,32 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+<html>
 <head>
-    <title></title>
-    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet">
+    <meta charset="utf-8">
+    <title>master-diplom.com</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="дипломы, курсовые, рефераты, контрольные работы">
+    <meta name="author" content="">
+    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.0/css/bootstrap-combined.min.css" rel="stylesheet">
+    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.0/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="/static/css/md.css" rel="stylesheet">
+
 </head>
-<body>
-{% block top_menu %}
-    <div class="container">
-<div class="navbar navbar-inverse">
-    <div class="navbar-inner">
+<body data-spy="scroll" data-target=".md-sidebar">
+
+
+<!-- Navbar
+    ================================================== -->
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
         <div class="container">
-            <a class="brand" href="/">master-diplom.com</a>
-            <div class="nav-collapse collapse">
-                <ul class="nav pull-right">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+         <a class="brand" href="/">master-diplom.com</a>
+          <div class="nav-collapse collapse">
+            <ul class="nav pull-right">
                     {% if user.is_anonymous %}
                         <li><a href="/accounts/login/" class="navbar-link">зайти в личный кабинет</a></li>
                         <li><a href="/accounts/register/" class="navbar-link">регистрация</a></li>
@@ -20,40 +34,78 @@
                         <li><a href="/account/" class="navbar-link">личный кабинет</a></li>
                         <li><a href="/accounts/logout/" class="navbar-link">выйти</a></li>
                     {% endif %}
-                </ul>
-                <ul class="nav">
-                    <li class="active"><a href="/" class="navbar-link">на главную</a></li>
-                </ul>
-            </div><!--/.nav-collapse -->
+             </ul>
+             <ul class="nav">
+                    <li class=""><a href="/" class="navbar-link">на главную</a></li>
+             </ul>
+		</div>
         </div>
+      </div>
     </div>
-</div>
-    </div> <!--/.container-->
+
+{% block header %}
+<!-- Subhead
+================================================== -->
+<header class="jumbotron subhead" id="overview">
+  <div class="container">
+		<p class="pull-right">help@master-diplom.com</p>
+		<h1>Мастер диплом</h1>
+
+	
+    <p class="lead">Дипломы, курсовые, рефераты на заказ. <a href="/create_order/" class="btn btn-large">Заказать</a></p>
+
+  </div>
+</header>
+{% endblock %}
+
+{% block top_menu %}
 {% endblock %}
 
 <div class="container">
-    <div class="row-fluid">
-        <div class="span2">
+
+	<div class="row">
+        <div class="span3 md-sidebar">
             <!--Sidebar content-->
             <div class="well sidebar-nav">
                 <ul class="nav nav-list">
-                    <li class="nav-header">Заказы</li>
-                    <li class="active"><a href="/">главная</a></li>
-                    <li><a href="/about/">о нас</a></li>
-                    <li class="nav-header">Sidebar</li>
-                    <li><a href="/create_order/">форма заказа</a></li>
+                    <li><a href="/"><i class="icon-chevron-right"></i> главная</a></li>
+                    <li><a href="/about/"><i class="icon-chevron-right"></i> о нас</a></li>
+                    <li><a href="/create_order/"><i class="icon-chevron-right"></i> форма заказа</a></li>
+		      <li><a href="/payment_methods/"><i class="icon-chevron-right"></i> способы оплаты</a></li>
+		      <li><a href="/faq/"><i class="icon-chevron-right"></i> F.A.Q.</a></li>
+		      <li><a href="/contacts/"><i class="icon-chevron-right"></i> контакты</a></li>
+		      <li><a href="/help/"><i class="icon-chevron-right"></i> help</a></li>
+		      <li><a href="/defense/"><i class="icon-chevron-right"></i> рекомендации по защите</a></li>
+		      <li><a href="/warranty/"><i class="icon-chevron-right"></i> гарантии</a></li>
+		      <li><a href="/prices/"><i class="icon-chevron-right"></i> цены</a></li>
+		      <li><a href="/activities/"><i class="icon-chevron-right"></i> акции, бонусы, скидки</a></li>
+		      <li><a href="/samples/"><i class="icon-chevron-right"></i> примеры работ</a></li>
+		      <li><a href="/comments/"><i class="icon-chevron-right"></i> отзывы</a></li>
                 </ul>
             </div><!--/.well -->
-        </div><!--/.span2 -->
-        <div class="span10">
+        </div><!--/.span3 -->
+        <div class="span9">
             {% block content %}
             {% endblock %}
             {% block main %}
             {% endblock %}
         </div>
-    </div>
+	</div>
+
 </div>
+
+    <!-- Footer
+    ================================================== -->
+    <footer class="footer">
+      <div class="container">
+	<div><p class="pull-right">Служба поддержки <a href="mailto:help@master-diplom.com">help@master-diplom.com</a></p></div>
+	
+      </div>
+	<div class="container"><p class="pull-right">2013</p></div>
+    </footer>
+
     <script src="http://code.jquery.com/jquery-latest.js"></script>
-    <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/js/bootstrap.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.0/js/bootstrap.min.js"></script>
 </body>
 </html>
+<header class="jumbotron subhead" id

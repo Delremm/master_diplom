@@ -84,7 +84,7 @@ class OrderAdmin(admin.ModelAdmin):
 
     def send_work(self, request, queryset):
         for q in queryset:
-            if q.work and (q.status == '3'):
+            if q.work and ((q.status == '3') or (q.status == '4')):
                 try:
                     send_work(request, request.user, order=q)
                 except:

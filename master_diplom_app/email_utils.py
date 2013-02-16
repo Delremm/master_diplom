@@ -40,9 +40,11 @@ def send_work(request, user, **kwargs):
 
     message = render_to_string('master_diplom/email_templates/work_delivery.txt', kwargs)
 
-    email = EmailMessage(subject, message, 'manager@master-diplom.com', [user.email])
-    
     order = kwargs['order']
+    destination = order.user.email
+    email = EmailMessage(subject, message, 'manager@master-diplom.com', [destination])
+    
+
 
     email.attach_file(order.work.work.path)
     email.send()
