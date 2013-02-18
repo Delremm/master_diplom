@@ -34,4 +34,5 @@ class ContactsForm(forms.Form):
     def clean_phone(self):
         phone = self.cleaned_data['phone']
         if len(str(phone)) > 11:
-            raise forms.ValidationError(u'Телефонный номер должен быть короче 11 символов.')
+            raise forms.ValidationError(u'Телефонный номер должен быть не более 11 символов.')
+        return phone
