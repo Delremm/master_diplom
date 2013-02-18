@@ -30,3 +30,8 @@ class ContactsForm(forms.Form):
             return email.lower()
         raise forms.ValidationError(
             u'Пользователь с указанным email уже существует, пожалуйста ввудите другой email или залогиньтесь.')
+
+    def clean_phone(self):
+        phone = self.cleaned_data['phone']
+        if len(str(phone)) > 11:
+            raise forms.ValidationError(u'Телефонный номер должен быть короче 11 символов.')
