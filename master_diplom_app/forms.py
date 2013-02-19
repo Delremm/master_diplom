@@ -5,8 +5,9 @@ from django import forms
 from models import Order, OrderData
 
 class OrderDataForm(forms.ModelForm):
-    theme = forms.CharField(widget=forms.Textarea, required=True, error_messages={'required': 'Введите тему руботы'})
-    content = forms.CharField(widget=forms.Textarea, required=True, error_messages={'required': 'Введите содержание работы'})
+    theme = forms.CharField(widget=forms.Textarea, required=True, label=u'Тема работы', error_messages={'required': 'Введите тему руботы'})
+    content = forms.CharField(widget=forms.Textarea, required=True, label=u'Содержание', error_messages={'required': 'Введите содержание работы'})
+
     class Meta:
         model = OrderData
         exclude =['created', 'order']

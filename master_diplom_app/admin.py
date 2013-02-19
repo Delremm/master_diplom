@@ -38,6 +38,8 @@ class OrderWorkInline(admin.TabularInline):
 class OrderDataInline(admin.StackedInline):
     model = OrderData
     extra = 0
+    #fields = ('discipline', 'type', 'theme', 'content', 'pages_num', 'cost', 'deadline', 'notes', 'created', 'order', 'file_link')
+    readonly_fields = ('file_link',)
 
 @add_link_field('orderdata','order_data', 'master_diplom_app')
 class OrderAdmin(admin.ModelAdmin):
@@ -109,3 +111,4 @@ class WorkAdmin(admin.ModelAdmin):
 admin.site.register(Order, OrderAdmin)
 admin.site.register(OrderData)
 admin.site.register(Work, WorkAdmin)
+admin.site.register(UserProfile)

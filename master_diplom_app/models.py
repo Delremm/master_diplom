@@ -2,6 +2,12 @@
 from datetime import datetime
 from django.db import models
 from django.contrib.auth.models import User
+from django.core.exceptions import ObjectDoesNotExist
+
+from django.utils.safestring import mark_safe
+
+def datetime_ymd_tomedia(dest):
+    return 'media/%s/%s/' % (dest, datetime.now().strftime('%Y%m%d'))
 
 
 TYPE_OF_WORK = (
@@ -35,10 +41,16 @@ class Order(models.Model):
         verbose_name_plural = u'Заказы'
 
     def __unicode__(self):
-        if self.order_data:
-            return "id: %s; theme: %s; content: %s" % ( self.id, self.order_data.theme, self.order_data.content)
+        try:
+            self.order_data
+        except ObjectDoesNotExist:
+            return "id: %s; created: %s" % (self.id, self.created.strftime('%Y %m  %d'))
         else:
-            return self.created.strftime('%Y %m  %d')
+            if self.order_data:
+                return "id: %s; theme: %s; content: %s" % ( self.id, self.order_data.theme, self.order_data.content)
+            else:
+                return self.created.strftime('%Y %m  %d')
+
 
 
 class OrderData(models.Model):
@@ -60,6 +72,8 @@ class OrderData(models.Model):
 
     order = models.OneToOneField(Order, null=True, blank=True, related_name='order_data', verbose_name=u'заказ')
 
+    attached_file = models.FileField(u'файл с дополнениями', upload_to=datetime_ymd_tomedia('order_data'), null=True, blank=True)
+
     class Meta:
         verbose_name = u'Данные о заказе'
         verbose_name_plural = u'Данные о заказе'
@@ -67,8 +81,14 @@ class OrderData(models.Model):
     def __unicode__(self):
         return u'id: %s; theme: %s; content: %s;' % (self.id, self.theme, self.content)
 
-def datetime_ymd_tomedia():
-    return 'media/works/%s/' % datetime.now().strftime('%Y%m%d')
+    def file_link(self):
+        if self.attached_file:
+            return mark_safe("<a href='/%s/'>скачать</a>" % (self.attached_file.url,))
+        else:
+            return "No attachment"
+    file_link.short_description = u'скачать приложенный к заказу файл'
+    file_link.allow_tags = True
+
 
 class Work(models.Model):
 
@@ -76,7 +96,7 @@ class Work(models.Model):
     content = models.TextField(blank=True, null=True, verbose_name=u'содержание')
     type = models.CharField(u'вид работы', blank=True, null=True, max_length=2, choices=TYPE_OF_WORK)
 
-    work = models.FileField(upload_to=datetime_ymd_tomedia())
+    work = models.FileField(upload_to=datetime_ymd_tomedia('works'))
 
     private = models.BooleanField(default=True)
     order = models.OneToOneField(Order, blank=True, null=True, related_name='work', verbose_name=u'заказ')

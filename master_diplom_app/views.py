@@ -44,7 +44,7 @@ class CreateOrderView(generic.TemplateView):
 
     def post(self, request, *args, **kwargs):
         context = self.get_context_data(**kwargs)
-        form = OrderDataForm(data=request.POST)
+        form = OrderDataForm(request.POST, request.FILES)
         if form.is_valid():
             data=dict(
                 discipline = form.cleaned_data['discipline'],
@@ -55,9 +55,10 @@ class CreateOrderView(generic.TemplateView):
                 cost = form.cleaned_data['cost'],
                 deadline = form.cleaned_data['deadline'],
                 notes = form.cleaned_data['notes'],
+                attached_file=request.FILES.get('attached_file', None)
             )
             order_data = OrderData(**data)
-            #order_data.save()
+            order_data.save()
             request.session['order_data'] = order_data
             return HttpResponseRedirect('/get_contact_info/')
         context['form'] = form
@@ -80,6 +81,8 @@ class ContactInfoView(generic.TemplateView):
 
     def get(self, request, *args, **kwargs):
         context = self.get_context_data(**kwargs)
+        if not request.session.get('order_data', 0):
+            return HttpResponseRedirect('/create_order/')
         user = request.user
         if user.is_authenticated():
             try:
@@ -128,6 +131,7 @@ class ContactInfoView(generic.TemplateView):
                 # phone will be saved at user.last_name
                 site = self.get_site(request)
                 order_data = request.session.get('order_data', None)
+
                 order = Order(user=user)
                 order.save()
                 order_data.order = order
