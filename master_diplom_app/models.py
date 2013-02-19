@@ -83,7 +83,7 @@ class OrderData(models.Model):
 
     def file_link(self):
         if self.attached_file:
-            return mark_safe("<a href='/%s/'>скачать</a>" % (self.attached_file.url,))
+            return mark_safe("<a href='%s'>скачать</a>" % (self.attached_file.url,))
         else:
             return "No attachment"
     file_link.short_description = u'скачать приложенный к заказу файл'
