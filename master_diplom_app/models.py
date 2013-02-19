@@ -72,7 +72,7 @@ class OrderData(models.Model):
 
     order = models.OneToOneField(Order, null=True, blank=True, related_name='order_data', verbose_name=u'заказ')
 
-    attached_file = models.FileField(u'файл с дополнениями', upload_to=datetime_ymd_tomedia('order_data'), null=True, blank=True)
+    attached_file = models.FileField(u'файл с дополнениями',upload_to='media/order_data/%Y/%m/%d/', null=True, blank=True)
 
     class Meta:
         verbose_name = u'Данные о заказе'
