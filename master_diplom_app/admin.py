@@ -55,11 +55,15 @@ class OrderAdmin(admin.ModelAdmin):
     )
     inlines = [OrderDataInline, OrderWorkInline]
 
-    list_display = ('id', 'order_data_theme', 'status', 'created')
+    list_display = ('id', 'order_data_theme', 'status', 'created', 'user_email')
 
     def order_data_theme(self, obj):
         return ("%s" % obj.order_data.theme)
-    order_data_theme.short_description = 'тема работы'
+    order_data_theme.short_description = u'тема работы'
+
+    def user_email(self, obj):
+        return obj.user.email
+    user_email.short_description = 'email'
 
     list_filter = ('status',)
     raw_id_fields = ('user',)
@@ -108,7 +112,20 @@ class WorkAdmin(admin.ModelAdmin):
     list_filter = ('private',)
     search_fields = ['theme', 'content']
 
+class OrderDataAdmin(admin.ModelAdmin):
+    list_display = ('id', 'theme', 'order', 'user_email')
+    list_filter = ('order',)
+
+    def user_email(self, obj):
+        try:
+            obj.order.user.email
+        except:
+            return None
+        else:
+            return obj.order.user.email
+    user_email.short_description = 'email'
+
 admin.site.register(Order, OrderAdmin)
-admin.site.register(OrderData)
+admin.site.register(OrderData, OrderDataAdmin)
 admin.site.register(Work, WorkAdmin)
 admin.site.register(UserProfile)
