@@ -1,4 +1,5 @@
 # coding:utf-8
+from datetime import date
 
 from django.views import generic
 from django.contrib.auth.models import User
@@ -40,6 +41,7 @@ class CreateOrderView(generic.TemplateView):
         context = super(CreateOrderView, self).get_context_data(**kwargs)
         form = OrderDataForm()
         context['form'] = form
+        context['date'] = date.strftime(date.today(), "%Y-%m-%d")
         return context
 
     def post(self, request, *args, **kwargs):
