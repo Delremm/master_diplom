@@ -60,14 +60,14 @@
 
 {% block top_menu %}
 {% endblock %}
-
+<h1></h1>
 <div class="container">
 
 	<div class="row">
         <div class="span3 md-sidebar">
             <!--Sidebar content-->
-            <div class="well sidebar-nav">
-                <ul class="nav nav-list">
+
+                <ul class="nav nav-list md-sidenav">
                     <li><a href="/"><i class="icon-chevron-right"></i> главная</a></li>
                     <li><a href="/about/"><i class="icon-chevron-right"></i> о нас</a></li>
                     <li><a href="/create_order/"><i class="icon-chevron-right"></i> форма заказа</a></li>
@@ -82,7 +82,7 @@
 		      <li><a href="/samples/"><i class="icon-chevron-right"></i> примеры работ</a></li>
 		      <li><a href="/comments/"><i class="icon-chevron-right"></i> отзывы</a></li>
                 </ul>
-            </div><!--/.well -->
+
         </div><!--/.span3 -->
         <div class="span9">
             {% block content %}
