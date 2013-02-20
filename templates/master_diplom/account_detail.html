@@ -1,5 +1,13 @@
 {% extends 'base.html' %}
-<h5>sd</h5>
+{% block head_extra %}
+    <link href="//master-diplom.com/static/css/bootstrap-rowlink.min.css" rel="stylesheet">
+    <script src="//master-diplom.com/static/js/bootstrap-rowlink.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+
+    })
+</script>
+{% endblock %}
 {% block content %}
     <h3>Информация о заказчике</h3>
     <p>email: {{ user.email }}</p>
@@ -10,9 +18,28 @@
 
     <div>
         <p><b>Заказы:</b></p>
+    <table class='table' data-provides="rowlink">
+        <caption>...</caption>
+        <thead>
+            <tr>
+              <th>дата создания</th>
+              <th>тема работы</th>
+              <th>статус</th>
+            </tr>
+        </thead>
+    <tbody>
+    {% for order in user.orders.all reversed %}
+    <tr>
+            <td><a href="/account/order/{{ order.id }}/">{{ order.created }}</a></td>
+            <td>{{ order.order_data.theme }}</td>
+            <td>{{ order.get_status_display }}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+    </table>
         {% for order in user.orders.all reversed %}
             <p>
-                <a href="/account/order/{{ order.id }}/">{{ order.created }} {{ order.order_data.theme }} {{ order.status }}</a>
+                <a href="/account/order/{{ order.id }}/">{{ order.created }} {{ order.order_data.theme }} {{ order.get_status_display }}</a>
             </p>
         {% endfor %}
     </div>

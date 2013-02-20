@@ -2,10 +2,10 @@
 
 {% block content %}
     <div>
-        <p>статус заказа: {{ object.status }}</p>
+        <p>статус заказа: {{ object.get_status_display }}</p>
         <p>тема работы: {{ object.order_data.theme }}</p>
         <p>содержание: {{ object.order_data.content }}</p>
-        <p>вид работы: {{ object.order_data.discipline }}</p>
+        <p>вид работы: {{ object.order_data.get_discipline_display }}</p>
         <p>крайний срок: {{ object.order_data.deadline }}</p>
         <p>заказчик: {{ object.user }}</p>
     </div>
@@ -14,8 +14,43 @@
         {% if object.status == '2' %}
             <form action="{{ payment_form.target }}" method="POST">
                 <p>{{ payment_form.as_p }}</p>
-                <p><input type="submit" value="Оплатить"></p>
+                <p><input type="submit" value="Оплатить" class="btn"></p>
             </form>
+        {% endif %}
+    </div>
+    <div>
+        {% if object.status == '4' %}
+            <div>
+            <form action="" method="POST">
+                {% csrf_token %}
+                <button type="submit" name="all_fine" class="btn btn-success">все в порядке</button>
+                <button type="submit" name="not_delivered" class="btn btn-warning btn-mini">работа не получена</button>
+                <button type="submit" name="bad_work" class="btn btn-danger btn-mini">плохая работа</button>
+            </form>
+            </div>
+        {% endif %}
+        {% if object.status == '5' %}
+            <div class="well">
+                <p>Вы сообщили нам, что вы не получили вашу работу.</p>
+                <p>В ближайшее время мы заново вышлем работу и свяжемся с вами.</p>
+            </div>
+        {% endif %}
+        {% if object.status == '6' %}
+            <div class="well">
+                <p>Вы сообщили нам, что работа вас не устроила.</p>
+                <p>Мы свяжемся с вами в ближайшее время и обсудим недочеты, а в случае недоговоренности - возврат денег.</p>
+            <form action="" method="POST">
+                {% csrf_token %}
+                <button type="submit" name="all_fine" class="btn btn-success">все в порядке</button>
+            </form>
+            </div>
+        {% endif %}
+        {% if object.status == '7' %}
+            <div class="well">
+                <p>Вы сообщили нам, что работа вас полностью устроила.</p>
+                <p>Спасибо за заказ.</p>
+                <p>Надеемся на дальнейшее сотрудничество. Всего хорошего.</p>
+            </div>
         {% endif %}
     </div>
 {% endblock %}

@@ -12,6 +12,11 @@ class OrderDataForm(forms.ModelForm):
         model = OrderData
         exclude =['created', 'order']
 
+    def __init__(self, *args, **kwargs):
+	    super(OrderDataForm, self).__init__(*args, **kwargs)
+	    self.fields['deadline'].required = True
+
+
 
 class ContactsForm(forms.Form):
     email = forms.EmailField(label='e-mail', error_messages={'required': u'Введите ваш email'})

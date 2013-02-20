@@ -251,7 +251,10 @@ class OrderDetailView(generic.TemplateView):
         context = self.get_context_data(**kwargs)
         try:
             order = request.user.orders.get(id=kwargs['pk'])
+            theme = order.order_data.theme
         except Order.DoesNotExist:
+            return HttpResponseRedirect('/account/')
+        except OrderData.DoesNotExist:
             return HttpResponseRedirect('/account/')
         else:
             form = RobokassaForm(initial={
@@ -266,3 +269,21 @@ class OrderDetailView(generic.TemplateView):
             context['payment_form'] = form
         return self.render_to_response(context)
 
+    def post(self, request, *args, **kwargs):
+        context = self.get_context_data(**kwargs)
+        try:
+            order = request.user.orders.get(id=kwargs['pk'])
+        except Order.DoesNotExist:
+            return HttpResponseRedirect('/account/')
+        else:
+            if 'bad_work' in request.POST:
+                order.status = '6'
+                order.save()
+            if 'not_delivered' in request.POST:
+                order.status = '5'
+                order.save()
+            if 'all_fine' in request.POST:
+                order.status = '7'
+                order.save()
+            context['object'] = order
+        return self.render_to_response(context)
