@@ -37,11 +37,6 @@
     {% endfor %}
     </tbody>
     </table>
-        {% for order in user.orders.all reversed %}
-            <p>
-                <a href="/account/order/{{ order.id }}/">{{ order.created }} {{ order.order_data.theme }} {{ order.get_status_display }}</a>
-            </p>
-        {% endfor %}
     </div>
 
 {% endblock %}
