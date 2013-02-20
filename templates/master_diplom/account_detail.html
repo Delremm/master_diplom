@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 <h5>sd</h5>
 {% block content %}
+    <h3>Информация о заказчике</h3>
     <p>email: {{ user.email }}</p>
     {% with user.profiles.all.0 as profile %}
         <p>имя и фамилия: {{ profile.name }}</p>
@@ -9,9 +10,9 @@
 
     <div>
         <p><b>Заказы:</b></p>
-        {% for order in user.orders.all %}
+        {% for order in user.orders.all reversed %}
             <p>
-                <a href="/account/order/{{ order.id }}/">{{ order.created }}</a>
+                <a href="/account/order/{{ order.id }}/">{{ order.created }} {{ order.order_data.theme }} {{ order.status }}</a>
             </p>
         {% endfor %}
     </div>

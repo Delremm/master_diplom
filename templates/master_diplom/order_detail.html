@@ -8,7 +8,7 @@
         <p>вид работы: {{ object.order_data.discipline }}</p>
         <p>заказчик: {{ object.user }}</p>
     </div>
-    <p>{{ object }}</p>
+
     <div>
         {% if object.status == '2' %}
             <form action="{{ payment_form.target }}" method="POST">
