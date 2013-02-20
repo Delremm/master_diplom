@@ -48,3 +48,18 @@ def send_work(request, user, **kwargs):
 
     email.attach_file(order.work.work.path)
     email.send()
+
+
+def send_payment_success_email(user, **kwargs):
+
+    ctx_dict = kwargs
+
+    subject = render_to_string('master_diplom/email_templates/payment_success_subject.txt',
+        ctx_dict)
+    # Email subject *must not* contain newlines
+    subject = ''.join(subject.splitlines())
+
+    message = render_to_string('master_diplom/email_templates/payment_success.txt',
+        ctx_dict)
+
+    user.email_user(subject, message, 'manager@master-diplom.com')
