@@ -14,9 +14,11 @@ class Migration(SchemaMigration):
                       keep_default=False)
 
 
+
     def backwards(self, orm):
         # Deleting field 'OrderData.attached_file'
         db.delete_column('master_diplom_app_orderdata', 'attached_file')
+
 
 
     models = {

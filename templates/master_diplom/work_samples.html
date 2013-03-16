@@ -25,8 +25,8 @@
         {% for object in object_list %}
         <tr>
             <td>{{ object.title }}</td>
-            <td><a href="/{{ object.work }}">скачать</a></td>
-            <td class="popover1" data-toggle="popover" data-content="{{ object.content }}">{{ object.content| truncatechars:50 }}</td>
+            <td><a href="{{ object.work.url }}">скачать</a></td>
+            <td class="popover1" data-toggle="popover" data-content="{{ object.content }}">{{ object.content|slice:"30" }}</td>
 
         </tr>
         {% endfor %}
