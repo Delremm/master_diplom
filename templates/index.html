@@ -1,5 +1,5 @@
 {% extends 'base.html'%}
-
+{% load fiber_tags %}
 
 {% block header %}
 <!-- Subhead
@@ -19,5 +19,8 @@
 
 <h1>Закажи работу мастера прямо сейчас</h1>
 	<a href="/create_order/" class="btn btn-large btn-primary">Заказать</a>
+
+<hr>
+    {% show_content "index_static" %}
 
 {% endblock %}
