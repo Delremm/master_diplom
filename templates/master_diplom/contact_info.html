@@ -22,21 +22,41 @@
         {{ form.non_field_errors }}
         <div class="fieldWrapper">
             {{ form.email.errors }}
-            <label for="email">{{ form.email.label }}:</label>
+            <label for="email"><strong>{{ form.email.label }}:</strong></label>
             {{ form.email }}
         </div>
         <div class="fieldWrapper">
             {{ form.name.errors }}
-            <label for="name">{{ form.name.label }}:</label>
+            <label for="name"><strong>{{ form.name.label }}:</strong></label>
             {{ form.name }}
         </div>
         <div class="fieldWrapper">
             {{ form.phone.errors }}
-            <label for="phone">{{ form.phone.label }}:</label>
+            <label for="phone"><strong>{{ form.phone.label }}</strong>:</label>
             {{ form.phone }}
         </div>
+        <div class="fieldWrapper">
+            {{ form.phone.errors }}
+            <label for="icq">{{ form.icq.label }}:</label>
+            {{ form.icq }}
+        </div>
+        <div class="fieldWrapper">
+            {{ form.phone.errors }}
+            <label for="town">{{ form.town.label }}:</label>
+            {{ form.town }}
+        </div>
+        <div class="fieldWrapper">
+            {{ form.phone.errors }}
+            <label for="institute">{{ form.institute.label }}:</label>
+            {{ form.institute }}
+        </div>
+        <div class="fieldWrapper">
+            {{ form.phone.errors }}
+            <label for="time_to_call">{{ form.time_to_call.label }}:</label>
+            {{ form.time_to_call }}
+        </div>
 
-        <input type="submit" value="Создать заказ">
+        <input type="submit" value="Создать заказ" class="btn btn-primary">
     </form>
 
     {% if login_form %}

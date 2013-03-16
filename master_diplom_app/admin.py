@@ -68,7 +68,7 @@ class OrderAdmin(admin.ModelAdmin):
     list_filter = ('status',)
     raw_id_fields = ('user',)
     search_fields = (['order_data__theme', 'order_data__content'])
-    readonly_fields = ('status',)
+    #readonly_fields = ('status',)
     actions = ['payment_notification', 'send_work']
 
     def payment_notification(self, request, queryset):

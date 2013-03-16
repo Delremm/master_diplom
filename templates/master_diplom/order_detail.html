@@ -2,12 +2,12 @@
 
 {% block content %}
     <div>
-        <p>статус заказа: {{ object.get_status_display }}</p>
+        <h4>статус заказа: {{ object.get_status_display }}</h4>
+        <hr>
         <p>тема работы: {{ object.order_data.theme }}</p>
         <p>содержание: {{ object.order_data.content }}</p>
         <p>вид работы: {{ object.order_data.get_discipline_display }}</p>
         <p>крайний срок: {{ object.order_data.deadline }}</p>
-        <p>заказчик: {{ object.user }}</p>
     </div>
 
     <div>

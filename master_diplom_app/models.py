@@ -67,7 +67,7 @@ class OrderData(models.Model):
     theme = models.TextField(u'тема работы', blank=True, null=True)
     content = models.TextField(u'содержание работы', blank=True, null=True)
     pages_num = models.IntegerField(u'примерное число страниц', blank=True, null=True)
-    cost = models.FloatField(u'желаемая стоимость', blank=True, null=True)
+    cost = models.FloatField(u'желаемая стоимость в рублях', blank=True, null=True)
     deadline = models.DateField(u'срок сдачи', blank=True, null=True)
     notes = models.TextField(u'примечания', blank=True, null=True)
 
@@ -119,6 +119,11 @@ class UserProfile(models.Model):
 
     name = models.CharField(max_length=255, blank=True, null=True)
     phone = models.CharField(max_length=12, blank=True, null=True)
+
+    icq = models.CharField(u'icq', max_length=1000, blank=True, null=True)
+    town = models.CharField(u'Город', max_length=1000, blank=True, null=True)
+    institute = models.CharField(u'Учебное заведение', max_length=1000, blank=True, null=True)
+    time_to_call = models.CharField(u'Удобное вребя для связи', max_length=1000, blank=True, null=True)
 
     def __unicode__(self):
         return self.user.email

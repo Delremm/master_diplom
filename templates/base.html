@@ -32,7 +32,7 @@
             <ul class="nav pull-right">
                     {% if user.is_anonymous %}
                         <li><a href="/accounts/login/" class="navbar-link">зайти в личный кабинет</a></li>
-                        <li><a href="/accounts/register/" class="navbar-link">регистрация</a></li>
+                        <!--<li><a href="/accounts/register/" class="navbar-link">регистрация</a></li>-->
                     {% else %}
                         <li><a href="/account/" class="navbar-link">личный кабинет</a></li>
                         <li><a href="/accounts/logout/" class="navbar-link">выйти</a></li>
@@ -109,6 +109,7 @@
 
 
     <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.0/js/bootstrap.min.js"></script>
+{% block extra_js %}
+{% endblock %}
 </body>
 </html>
-<header class="jumbotron subhead" id

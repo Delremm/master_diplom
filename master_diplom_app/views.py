@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 
-from models import Order, OrderData, UserProfile
+from models import Order, OrderData, UserProfile, Work
 from forms import OrderDataForm, ContactsForm
 
 from registration_email.forms import EmailAuthenticationForm
@@ -117,6 +117,11 @@ class ContactInfoView(generic.TemplateView):
             name = form.cleaned_data['name']
             phone = form.cleaned_data['phone']
 
+            icq = form.cleaned_data['icq']
+            town = form.cleaned_data['town']
+            institute = form.cleaned_data['institute']
+            time_to_call = form.cleaned_data['time_to_call']
+
             request.session['order_email'] = email
             email = self.clean_email(email)
             try:
@@ -128,7 +133,8 @@ class ContactInfoView(generic.TemplateView):
             except User.DoesNotExist:
                 password = hashlib.new('sha1', email).hexdigest()[0:6]
                 user = self.register_new_user(request, email, password)
-                profile = UserProfile(user=user, name=name, phone=phone)
+                profile = UserProfile(user=user, name=name, phone=phone, icq=icq, town=town, institute=institute,
+                                      time_to_call=time_to_call)
                 profile.save()
                 # phone will be saved at user.last_name
                 site = self.get_site(request)
@@ -287,3 +293,9 @@ class OrderDetailView(generic.TemplateView):
                 order.save()
             context['object'] = order
         return self.render_to_response(context)
+
+
+class WorkSamplesVies(generic.ListView):
+    paginate_by = 10
+    queryset = Work.objects.all().filter(private=False)
+    template_name = 'master_diplom/work_samples.html'

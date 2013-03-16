@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block head_extra %}
+    <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('.popover1').popover({
+                placement: 'bottom'
+            });
+        });
+
+    </script>
+{% endblock %}
+{% block content %}
+
+        <table class="table">
+        <thead>
+        <tr>
+            <td><p>Тема</p></td>
+            <td>ссылка для скачивания</td>
+            <td>Содержание</td>
+        </tr>
+        </thead>
+        <tbody>
+        {% for object in object_list %}
+        <tr>
+            <td>{{ object.title }}</td>
+            <td><a href="/{{ object.work }}">скачать</a></td>
+            <td class="popover1" data-toggle="popover" data-content="{{ object.content }}">{{ object.content| truncatechars:50 }}</td>
+
+        </tr>
+        {% endfor %}
+        </tbody>
+        </table>
+        <p>{{ object }}</p>
+
+{% endblock %}
+{% block extra_js %}
+
+{% endblock %}
