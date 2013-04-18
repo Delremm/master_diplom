@@ -203,7 +203,7 @@ ROBOKASSA_LOGIN = 'master-diplom'
 ROBOKASSA_PASSWORD1 = 'masterdiplom1'
 ROBOKASSA_PASSWORD2 = 'masterdiplom2'
 ROBOKASSA_USE_POST = True
-ROBOKASSA_TEST_MODE = True
+ROBOKASSA_TEST_MODE = False
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
 # the site admins on every HTTP 500 error when DEBUG=False.
