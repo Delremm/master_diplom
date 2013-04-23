@@ -18,8 +18,8 @@
         {{ form.password }}
     </div>
     <div class="fieldWrapper">
-        <a href="{% url "auth_password_reset" %}">{% trans "Забили пароль?" %}</a>
-        <a href="{% url "registration_register" %}">{% trans "Зарегистрироваться" %}</a>?
+	Пароль высылается на почту после оформления заказа.
+        <a href="{% url "auth_password_reset" %}">{% trans "Забыли пароль?" %}</a>
     </div>
     <input type="hidden" name="next" value="{{ next }}" />
     <input type="submit" value="{% trans "Login" %}">
