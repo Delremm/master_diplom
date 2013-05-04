@@ -11,7 +11,13 @@ from django.contrib.auth import views as auth_views
 from django import forms
 from registration_email.forms import EmailAuthenticationForm
 from registration_email.auth import EmailBackend
+
 from django.views.generic import RedirectView
+from django.views import generic
+
+from django.http import HttpResponse
+
+handler404 = 'django.views.defaults.page_not_found'
 
 urlpatterns = patterns('',
     # Examples:
@@ -24,9 +30,10 @@ urlpatterns = patterns('',
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
     url(r'^accounts/', include('registration_email.backends.simple.urls')),
-    url(r'', include('master_diplom_app.urls')),
+    url(r'^', include('master_diplom_app.urls')),
     url(r'^/', RedirectView.as_view(url='/')),
     url(r'^robokassa/', include('robokassa.urls')),
+    (r'^robots\.txt$', lambda r: HttpResponse("", mimetype="text/plain")),
     #(r'^grappelli/', include('grappelli.urls')),
     (r'^api/v2/', include('fiber.rest_api.urls')),
     (r'^admin/fiber/', include('fiber.admin_urls')),
