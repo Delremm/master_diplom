@@ -29,8 +29,8 @@ else:
             'ENGINE': 'django.db.backends.postgresql_psycopg2', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
             'NAME': 'master_diplom',                      # Or path to database file if using sqlite3.
             # The following settings are not used with sqlite3:
-            'USER': 'master_diplom',
-            'PASSWORD': '314159',
+            'USER': '**',
+            'PASSWORD': '**',
             'HOST': '',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
             'PORT': '',                      # Set to empty string for default.
         }
@@ -38,8 +38,8 @@ else:
 
 
 EMAIL_HOST = 'smtp.webfaction.com'
-EMAIL_HOST_USER = 'master_diplom'
-EMAIL_HOST_PASSWORD = '314159'
+EMAIL_HOST_USER = '**'
+EMAIL_HOST_PASSWORD = '**'
 DEFAULT_FROM_EMAIL = 'admin@master-diplom.com'
 SERVER_EMAIL = 'admin@master-diplom.com'
 
@@ -199,9 +199,9 @@ if os.environ.get('django_local', 0 ):
     STATIC_URL = '/static/'
     MEDIA_URL = ''
 
-ROBOKASSA_LOGIN = 'master-diplom'
-ROBOKASSA_PASSWORD1 = 'masterdiplom1'
-ROBOKASSA_PASSWORD2 = 'masterdiplom2'
+ROBOKASSA_LOGIN = '**'
+ROBOKASSA_PASSWORD1 = '**'
+ROBOKASSA_PASSWORD2 = '**'
 ROBOKASSA_USE_POST = True
 ROBOKASSA_TEST_MODE = False
 # A sample logging configuration. The only tangible logging
